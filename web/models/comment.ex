@@ -20,6 +20,10 @@ defmodule HelloPhoenix.Comment do
     |> join(:inner, [comment], p in assoc(comment, :post))
     |> where([comment, p],  p.likes == 4)
   end
+  
+  def with_popular_post2(query) do
+    from c in query, join: p in assoc(c, :post), where: p.likes == 4
+  end
 
   def for_author(query, author) do
     query

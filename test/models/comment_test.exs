@@ -19,4 +19,11 @@ defmodule HelloPhoenix.CommentTest do
     comment = %Comment{title: "a comment", body: "hi", likes: 10, post_id: post.id, author_id: author.id} |> Repo.insert!
     assert (Comment |> Comment.for_author(author) |> Comment.with_popular_post() |> Repo.all) == [comment] # fails
   end
+  
+  test "composing works when using keyword syntax" do
+    author = %Author{name: "ian"} |> Repo.insert!
+    post = %Post{title: "hi", body: "a post", likes: 4, author_id: author.id} |> Repo.insert!
+    comment = %Comment{title: "a comment", body: "hi", likes: 10, post_id: post.id, author_id: author.id} |> Repo.insert!
+    assert (Comment |> Comment.for_author(author) |> Comment.with_popular_post2() |> Repo.all) == [comment] # fails
+  end 
 end
